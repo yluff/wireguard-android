@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       password:
-        description: "请输入签名证书密码（不支持中文密码，至少6位）"
+        description: '请输入签名证书密码：（不支持中文密码，且最少6位字符）'
         required: false
-        default: "password"
+        default: 'password'
 
 env:
   password: "${{ github.event.inputs.password }}"
@@ -15,6 +15,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: 配置Git安全目录
+        run: git config --global --add safe.directory '*'
+
       - name: 检查仓库
         uses: actions/checkout@v4
         with:
@@ -25,10 +28,10 @@ jobs:
       - name: 设置JDK环境
         uses: actions/setup-java@v4
         with:
-          distribution: "microsoft"
+          distribution: microsoft
           java-version: 17
 
-      - name: 构建 APK
+      - name: 构建APK
         run: |
           bash ./gradlew assembleRelease
 
