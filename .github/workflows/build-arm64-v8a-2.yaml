@@ -1,4 +1,4 @@
-name: build-arm64
+name: build-arm64-2
 
 on:
   workflow_dispatch:
