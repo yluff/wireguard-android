@@ -368,6 +368,7 @@ object Updater {
     }
 
     fun monitorForUpdates() {
+        return  
         if (BuildConfig.DEBUG)
             return
 
